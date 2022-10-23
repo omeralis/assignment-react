@@ -1,0 +1,132 @@
+body {
+  color: #566787;
+  background: #f5f5f5;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 13px;
+}
+.btn-close{
+  display: none;
+}
+.wrapper {
+  background: #ffffff;
+  padding: 20px 0;
+  margin: 30px 0;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  display: flex;
+  justify-content: space-between;
+}
+.wrapper  h2 {
+  margin: 5px 0 0;
+  font-size: 24px;
+}
+.wrapper  .btn-group {
+  float: right;
+}
+.wrapper  .btn {
+  color: #fff;
+  background-color: blue;
+  float: right;
+  font-size: 13px;
+  border: none;
+  min-width: 50px;
+  border-radius: 5px;
+  border: none;
+  outline: none !important;
+  margin-left: 10px;
+}
+.wrapper .btn:hover{
+  background-color: rgba(0, 0, 255, 0.815);
+  color: #ffffff;
+}
+.btn-closeModel {
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em 0.25em;
+  color: #000;
+  background: transparent
+   url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e') center/1em auto no-repeat;
+  border: 0;
+  border-radius: 0.375rem;
+  opacity: 0.5;
+}
+.icon{
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.5rem;   
+  cursor: pointer;
+}
+.edit {
+  color: #009688;
+}
+.delete {
+  color: #ff1100;
+}
+
+/*  */
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 15px;
+  width: 400px;
+  opacity: 0.9;
+}
+.center h1 {
+  text-align: center;
+  padding: 0 0 20px 0;
+  border-bottom: 1px solid #2b8cd2;
+  color:#2a2929;
+     
+}
+.center form {
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+form .txt_field {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+.txt_field input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+.txt_field label {
+  position: absolute;
+  top: 0;
+  /* top: 50%; */
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: .5s;
+}
+.txt_field span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width:0;
+  height: 2px;
+  background: #2691d9;
+  transition: .5s;
+}
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label {
+  top: -5px;
+  color: #2691d9;
+}
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before {
+  width: 100%;
+}

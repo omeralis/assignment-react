@@ -1,0 +1,116 @@
+{
+  "UserData": [
+    {
+      "user_name": "omer",
+      "password": "1234",
+      "Active": true,
+      "User_type": "admin",
+      "create_date": "1/1/2020",
+      "activation_date": "true",
+      "deActication_date": "1/1/2020",
+      "updated_date": "1/1/2020",
+      "id": 1
+    },
+    {
+      "user_name": "ali",
+      "password": "1234",
+      "Active": true,
+      "User_type": "user",
+      "create_date": "1/1/2020",
+      "activation_date": "true",
+      "deActication_date": "1/1/2020",
+      "updated_date": "1/1/2020",
+      "id": 2
+    }
+  ],
+  "UserTask": [
+    {
+      "id": 1,
+      "task_name": "Task1",
+      "task_date": "2022-10-23",
+      "actions": [
+        "CallMyFather",
+        "FinishHomeWork"
+      ]
+    },
+    {
+      "id": 2,
+      "task_name": "Task",
+      "task_date": "Mon 08/08/2022 06:00:00:07 Am",
+      "actions": [
+        "CallMyFather",
+        "FinishHomeWork"
+      ]
+    },
+    {
+      "task_name": "test",
+      "task_date": "2022-10-21",
+      "actions": [
+        "CallMyFather",
+        "FinishHomeWork"
+      ],
+      "id": 4
+    },
+    {
+      "task_name": "llllmmm",
+      "task_date": "2022-10-21",
+      "actions": [
+        "CallMyFather",
+        "FinishHomeWork"
+      ],
+      "id": 5
+    },
+    {
+      "task_name": "test",
+      "task_date": "2022-10-21",
+      "actions": "bringGiftToMySisitrtBirthday",
+      "id": 6
+    },
+    {
+      "task_name": "task",
+      "task_date": "2022-10-21",
+      "actions": [
+        "CallMyFather",
+        "FinishHomeWork"
+      ],
+      "id": 7
+    },
+    {
+      "task_name": "tetetet",
+      "task_date": "2022-10-21",
+      "actions": [
+        "CallMyFather",
+        "FinishHomeWork",
+        "bringGiftToMySisitrtBirthday "
+      ],
+      "id": 8
+    },
+    {
+      "task_name": "task",
+      "task_date": "2022-10-21",
+      "actions": [
+        "goingToThePark",
+        "CallMyFather"
+      ],
+      "id": 9
+    },
+    {
+      "task_name": "test",
+      "task_date": "2022-10-21",
+      "actions": [
+        "goingToThePark",
+        "CallMyFather"
+      ],
+      "id": 10
+    },
+    {
+      "task_name": "te",
+      "task_date": "2022-10-23",
+      "actions": [
+        "goingToThePark",
+        "CallMyFather"
+      ],
+      "id": 11
+    }
+  ]
+}
