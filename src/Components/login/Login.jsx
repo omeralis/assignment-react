@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { login, getData } from "../../features/UserSlice";
+import { login } from "../../features/UserSlice";
 import { useDispatch } from "react-redux";
 import "./login.css";
 const LoginComponent = () => {
@@ -37,7 +37,7 @@ const LoginComponent = () => {
         // setIsSubmitted(true);
         setUser(userData);
         dispatch(login(userData));
-        dispatch(getData(userData));
+        // dispatch(getData(userData));
       }
     } else {
       // Username not found

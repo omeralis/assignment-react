@@ -6,31 +6,48 @@ export const UserSlice = createSlice({
     isAuthenticated: false,
     user: null,
     isAdmin: false,
-    isNameUser: null,
+    nameUser: "",
   },
   reducers: {
-    login: (state) => {
+    login: (state, action) => {
+      const newUser = action.payload;
+      const existingUsers = JSON.parse(JSON.stringify(newUser));
+      state.user = existingUsers;
+
       state.user = state.user;
       state.isAuthenticated = true;
       console.log("LOGIN", state);
+      state.nameUser = state.user.user_name;
+      if (state.user.User_type === "admin") {
+        state.isAdmin = true;
+        console.log(state.isAdmin);
+      }
+      console.log("state.user", state.user);
+      console.log("state.nameUser", state.nameUser);
     },
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
     },
-    getData(state, action) {
-      const newUser = action.payload;
-      const existingUsers = JSON.parse(JSON.stringify(newUser));
-      state.user = existingUsers;
-      state.isNameUser = state.user.user_name;
-      if (state.user.User_type === "admin") {
-        state.isAdmin = true;
-        console.log(state.isAdmin);
-      }
-    },
+    // getData(state, action) {
+    //   const newUser = action.payload;
+    //   const existingUsers = JSON.parse(JSON.stringify(newUser));
+    //   state.user = existingUsers;
+    //   state.nameUser = state.user.user_name;
+    //   console.log("state.user", state.user);
+    //   console.log("state.nameUser", state.nameUser);
+    //   if (state.user.User_type === "admin") {
+    //     state.isAdmin = true;
+    //     state.nameUser = state.user.user_name;
+    //     console.log(state.isAdmin);
+    //   }
+    //   state.nameUser = state.user.user_name;
+    // },
   },
 });
 
-export const { login, logout, getData } = UserSlice.actions;
+export const { login, logout } = UserSlice.actions;
 export const selectUser = (state) => state.user.isAuthenticated;
+export const selectUserName = (state) => state.user.user;
+export const selectUserAdmin = (state) => state.user.user;
 export default UserSlice.reducer;

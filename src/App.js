@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import { useEffect, useState } from "react";
@@ -33,7 +34,58 @@ export default function App() {
 
   return (
     <div className="App">
-      <Header />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route
+            path="/login"
+            exact
+            element={
+              <ProtectedRoute>
+                <Login />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/logout"
+            exact
+            element={
+              <PrivateRoute>
+                <Logout />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/"
+            exact
+            element={
+              <PrivateRoute>
+                <Users />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/user"
+            exact
+            element={
+              <PrivateRoute>
+                <Users />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/task"
+            exact
+            element={
+              <PrivateRoute>
+                <TaskManager />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+      {/* 
       <Router>
         <Routes>
           <Route
@@ -83,7 +135,57 @@ export default function App() {
             }
           />
         </Routes>
-      </Router>
+      </Router> */}
+      {/* <Router>
+        <Routes>
+          <Route
+            path="/login"
+            exact
+            element={
+              <ProtectedRoute>
+                <Login />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/logout"
+            exact
+            element={
+              <PrivateRoute>
+                <Logout />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/"
+            exact
+            element={
+              <PrivateRoute>
+                <Users />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/user"
+            exact
+            element={
+              <PrivateRoute>
+                <Users />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/task"
+            exact
+            element={
+              <PrivateRoute>
+                <TaskManager />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router> */}
     </div>
   );
 }
