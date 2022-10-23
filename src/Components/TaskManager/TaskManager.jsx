@@ -14,17 +14,17 @@ const TaskManager = () => {
     return invokeModal(true);
   };
   const CloseModal = () => {
+    setID(0);
     return invokeModal(false);
   };
   const [isShowEdit, EditModal] = useState(false);
   const ShowModalEdit = () => {
     return EditModal(true);
   };
-  const CloseModalEdit = () => {
-    return EditModal(false);
-  };
+
   const [tasks, setTasks] = useState([]);
-  const [id, setID] = useState("");
+  const [readonlyview, setReadonlyview] = useState(false);
+  const [id, setID] = useState(0);
   const [task_name, setTask_name] = useState("");
   const [task_date, setTask_date] = useState("");
   const [actions, setActions] = useState("");
@@ -49,7 +49,7 @@ const TaskManager = () => {
   }, []);
   //fetch from server
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:5000/UserTask");
+    const res = await fetch("http://localhost:7000/UserTask");
     const data = await res.json();
     console.log(data);
     return data;
@@ -58,14 +58,14 @@ const TaskManager = () => {
 
   //fetch from server
   const fetchTaskId = async (id) => {
-    const res = await fetch(`http://localhost:5000/UserTask/${id}`);
+    const res = await fetch(`http://localhost:7000/UserTask/${id}`);
     const data = await res.json();
     // console.log(data);
     return data;
   };
   // Add new User db
   const onAdd = async (UserTask) => {
-    const res = await fetch(`http://localhost:5000/UserTask`, {
+    const res = await fetch(`http://localhost:7000/UserTask`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(UserTask),
@@ -95,14 +95,12 @@ const TaskManager = () => {
       task_date,
       actions,
     });
-    setTask_name("");
-    setTask_date("");
-    setActions("");
+    clearDataEdit();
     CloseModal();
   };
   // delete Task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/UserTask/${id}`, {
+    await fetch(`http://localhost:7000/UserTask/${id}`, {
       method: "DELETE",
     });
     setTasks(tasks.filter((task) => task.id !== id));
@@ -127,7 +125,7 @@ const TaskManager = () => {
       task_date,
       actions,
     };
-    const res = await fetch(`http://localhost:5000/UserTask/${id}`, {
+    const res = await fetch(`http://localhost:7000/UserTask/${id}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(updTask),
@@ -149,15 +147,29 @@ const TaskManager = () => {
     if (res) {
       alertify.success("Edit Successful");
     }
+    clearDataEdit();
+    CloseModal();
+  };
+  const clearDataEdit = () => {
     setTask_name("");
     setTask_date("");
     setActions("");
-    CloseModal();
-    CloseModalEdit();
   };
-
   const handleChange = (e) => {
     setActions(e.map((item) => item.value));
+  };
+
+  const formsubmit = (e, viewOnly) => {
+    console.log("e value", e);
+    clearDataEdit();
+    setReadonlyview(viewOnly);
+    if (e !== 0) {
+      console.log("edit form");
+      getDataEdit(e);
+      setID(e.id);
+    }
+    console.log(readonlyview);
+    ShowModal();
   };
 
   return (
@@ -168,7 +180,11 @@ const TaskManager = () => {
             <h2>List Task Manager</h2>
           </div>
           <div className="btn-hedaer">
-            <ButtonBtn className="btn" text={"add"} onClick={ShowModal} />
+            <ButtonBtn
+              className="btn"
+              text={"add"}
+              onClick={() => formsubmit(0, false)}
+            />
           </div>
         </div>
         <div className="main-table">
@@ -195,12 +211,12 @@ const TaskManager = () => {
                     <FaRegFileAlt
                       className="edit"
                       title="edit"
-                      onClick={() => getDataEdit(data)}
+                      onClick={() => formsubmit(data, true)}
                     />
                     <FaPen
                       className="edit"
                       title="edit"
-                      onClick={() => getDataEdit(data)}
+                      onClick={() => formsubmit(data, false)}
                     />{" "}
                     <FaTrashAlt
                       title="Delete"
@@ -227,12 +243,21 @@ const TaskManager = () => {
         </div>
 
         {/* Model Add Data Users */}
+        {/* onShow={isShowEdit}
+          onOpen={ShowModalEdit}
+          OnClose={CloseModalEdit}
+          title="Edit Task"
+          onSave={() => EditTask(id)} */}
         <ModalDialog
           onShow={isShow}
           onOpen={ShowModal}
           OnClose={CloseModal}
-          title="Add Task"
-          onSave={onSubmit}
+          title={
+            id !== 0 ? (readonlyview ? "View User" : "Edit User") : "Add User"
+          }
+          onSave={(e) =>
+            id === 0 ? onSubmit(e) : readonlyview ? readonlyview : EditTask(id)
+          }
           bodyModel={
             <>
               <form onSubmit={onSubmit}>
@@ -240,9 +265,16 @@ const TaskManager = () => {
                   <div className="col-md-6">
                     <div className="txt_field">
                       <input
+                        type="hidden"
+                        value={id}
+                        onChange={(e) => setID(e.target.value)}
+                        required
+                      />
+                      <input
                         type="text"
                         value={task_name}
                         onChange={(e) => setTask_name(e.target.value)}
+                        disabled={readonlyview ? true : false}
                         required
                       />
                       <span></span>
@@ -255,6 +287,7 @@ const TaskManager = () => {
                         type="date"
                         value={task_date}
                         onChange={(e) => setTask_date(e.target.value)}
+                        disabled={readonlyview ? true : false}
                         required
                       />
                     </div>
@@ -264,10 +297,12 @@ const TaskManager = () => {
                       <Select
                         isMulti
                         name="colors"
+                        defaultValue={[actions]}
                         options={options}
                         onChange={(options) => handleChange(options)}
                         className="basic-multi-select"
                         classNamePrefix="select"
+                        disabled={readonlyview ? true : false}
                       />
                     </div>
                   </div>
@@ -278,7 +313,7 @@ const TaskManager = () => {
         ></ModalDialog>
 
         {/* Model Edit Data Users */}
-        <ModalDialog
+        {/* <ModalDialog
           onShow={isShowEdit}
           onOpen={ShowModalEdit}
           OnClose={CloseModalEdit}
@@ -331,7 +366,7 @@ const TaskManager = () => {
               </form>
             </>
           }
-        ></ModalDialog>
+        ></ModalDialog> */}
       </div>
     </>
   );

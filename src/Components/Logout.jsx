@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../features/UserSlice";
 import { useDispatch } from "react-redux";
 const LogoutComponent = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();

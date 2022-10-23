@@ -38,21 +38,21 @@ const Users = () => {
   }, []);
   //fetch from server
   const fetchUser = async () => {
-    const res = await fetch("http://localhost:5000/UserData");
+    const res = await fetch("http://localhost:7000/UserData");
     const data = await res.json();
     console.log(data);
     return data;
   };
   //fetch from server
   const fetchUserId = async (id) => {
-    const res = await fetch(`http://localhost:5000/UserData/${id}`);
+    const res = await fetch(`http://localhost:7000/UserData/${id}`);
     const data = await res.json();
     // console.log(data);
     return data;
   };
   // Add new User db
   const onAdd = async (UserData) => {
-    const res = await fetch(`http://localhost:5000/UserData`, {
+    const res = await fetch(`http://localhost:7000/UserData`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(UserData),
@@ -106,7 +106,7 @@ const Users = () => {
   };
   // delete User
   const deleteUser = async (id) => {
-    await fetch(`http://localhost:5000/UserData/${id}`, {
+    await fetch(`http://localhost:7000/UserData/${id}`, {
       method: "DELETE",
     });
     setUser(users.filter((user) => user.id !== id));
@@ -148,7 +148,7 @@ const Users = () => {
       deActication_date,
       updated_date,
     };
-    const res = await fetch(`http://localhost:5000/UserData/${id}`, {
+    const res = await fetch(`http://localhost:7000/UserData/${id}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(updUser),
@@ -188,7 +188,7 @@ const Users = () => {
     const ActiveEditUser = await fetchUserId(id);
     const updTask = { ...ActiveEditUser, Active: !ActiveEditUser.Active };
     // if (ActiveEditUser.User_type === "admin") {
-    const res = await fetch(`http://localhost:5000/UserData/${id}`, {
+    const res = await fetch(`http://localhost:7000/UserData/${id}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(updTask),

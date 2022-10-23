@@ -29,20 +29,6 @@ export const UserSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
     },
-    // getData(state, action) {
-    //   const newUser = action.payload;
-    //   const existingUsers = JSON.parse(JSON.stringify(newUser));
-    //   state.user = existingUsers;
-    //   state.nameUser = state.user.user_name;
-    //   console.log("state.user", state.user);
-    //   console.log("state.nameUser", state.nameUser);
-    //   if (state.user.User_type === "admin") {
-    //     state.isAdmin = true;
-    //     state.nameUser = state.user.user_name;
-    //     console.log(state.isAdmin);
-    //   }
-    //   state.nameUser = state.user.user_name;
-    // },
   },
 });
 

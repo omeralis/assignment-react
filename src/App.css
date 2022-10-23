@@ -63,7 +63,9 @@ body {
 .delete {
   color: #ff1100;
 }
-
+.nav-link.navbar-nav {
+  cursor: pointer !important;
+}
 /*  */
 .center {
   position: absolute;

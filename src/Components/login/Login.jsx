@@ -52,37 +52,39 @@ const LoginComponent = () => {
       <div className="error">{errorMessages.message}</div>
     );
   return (
-    <div className="center">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="txt_field">
-          <input
-            id="user_name"
-            name="user_name"
-            type="text"
-            required
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            // placeholder="user_name "
-          />
-          {renderErrorMessage("uname")}
-          <span></span>
-          <label>Username</label>
-        </div>
-        <div className="txt_field">
-          <input
-            id="password"
-            name="password"
-            type="password"
-            required
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            // placeholder="Password"
-          />
-          {renderErrorMessage("pass")}
-          <span></span>
-          <label>Password</label>
-        </div>
-        <input type="submit" className="singin" value="Login" />
-      </form>
+    <div className="login-form">
+      <div className="center">
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="txt_field">
+            <input
+              id="user_name"
+              name="user_name"
+              type="text"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              // placeholder="user_name "
+            />
+            {renderErrorMessage("uname")}
+            <span></span>
+            <label>Username</label>
+          </div>
+          <div className="txt_field">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              // placeholder="Password"
+            />
+            {renderErrorMessage("pass")}
+            <span></span>
+            <label>Password</label>
+          </div>
+          <input type="submit" className="singin" value="Login" />
+        </form>
+      </div>
     </div>
   );
 };

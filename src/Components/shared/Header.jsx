@@ -52,11 +52,13 @@ const Header = () => {
                     Tasks
                   </Link>
                 </Nav>
-                <Nav>
-                  <Link className="nav-link" to="/login">
-                    login
-                  </Link>
-                </Nav>
+                {!isAuthenticated && (
+                  <Nav>
+                    <Link className="nav-link" to="/login">
+                      login
+                    </Link>
+                  </Nav>
+                )}
               </Nav>
               <Nav>
                 <Nav className="nav-link">Welcom {nameUser.user_name} </Nav>
